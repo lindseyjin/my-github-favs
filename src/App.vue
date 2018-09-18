@@ -3,7 +3,7 @@
     <div id="header">
       <h1>My Github Favourites</h1>
     </div>
-    <content/>
+    <Content></Content>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
 
 <style>
 
-   body, .container {
+   html, body, .container {
      margin: 0;
      height: 100%;
      font-family: 'Roboto', sans-serif;
@@ -27,12 +27,12 @@ export default {
     color: white;
     text-align: center;
     margin: 0;
-    padding-top: 40px;
-
+    padding-top: 45px;
+    line-height: 1.4rem;
   }
   #header {
     background-color: #7433F1;
     width: 100%;
-    height: 120px;
+    height: 110px;
   }
 </style>
