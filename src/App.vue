@@ -3,16 +3,16 @@
     <div id="header">
       <h1>My Github Favourites</h1>
     </div>
-    <Content></Content>
+    <MainPage></MainPage>
   </div>
 </template>
 
 <script>
-import Content from './components/content'
+import MainPage from './components/main-page'
 
 export default {
   name: 'App',
-  components: {Content}
+  components: {MainPage}
 }
 </script>
 

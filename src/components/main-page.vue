@@ -1,7 +1,7 @@
 <template>
-  <div class="content">
+  <div class="container">
     <div class="left">
-      <div v-for="item in data">
+      <div v-for="item in results" :key = item.id>
         <!--add search bar-->
         {{item}}
       </div>
@@ -13,21 +13,26 @@
 </template>
 
 <script>
-  export default {
-    name: 'content',
-    data () {
-      return {
-        data: [{'name': 'sample', 'language': 'aaaa', 'latest_tag': 'eg'},
-          {'name': 'sample2', 'language': 'ssssss', 'latest_tag': 'eggg'},
-          {'name': 'pears github project', 'language': 'pear screms', 'latest_tag': 'AAAAA'}]
-      }
+  import UserService from '../services/UserService'
+export default {
+  name: 'main-page',
+  dependencies: [UserService],
+  mounted () {
+    this.results = UserService.getRepos()
+  },
+  data () {
+    return {
+      results: [{'name': 'sample', 'language': 'aaaa', 'latest_tag': 'eg'},
+        {'name': 'sample2', 'language': 'ssssss', 'latest_tag': 'eggg'},
+        {'name': 'pears github project', 'language': 'pear screms', 'latest_tag': 'AAAAA'}]
     }
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .content {
+  .container {
     height: 100%;
     position: relative;
   }
