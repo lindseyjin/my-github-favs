@@ -1,6 +1,12 @@
 <template>
   <div class="app-container">
     <div class="left">
+      <form class="form-search">
+        <div class="input-append">
+          <input type="text" v-model="search" class="span2 search-query">
+          <button type="submit" class="btn" @click="updateSearch(search)">Search</button>
+        </div>
+      </form>
       <table>
         <tr>
           <th>Name</th>
@@ -9,7 +15,7 @@
           <th></th>
         </tr>
         <tr v-for="item in results">
-          <td>{{item['full_name']}}</td>
+          <td> <a :href="item['html_url']">{{item['full_name']}}</a></td>
           <td>{{item['language']}}</td>
           <td>{{item['latest_tag']}}</td>
           <td>
@@ -28,7 +34,7 @@
           <th></th>
         </tr>
         <tr v-for="item in selected">
-          <td>{{item['full_name']}}</td>
+          <td><a :href="item['html_url']">{{item['full_name']}}</a></td>
           <td>{{item['language']}}</td>
           <td>{{item['latest_tag']}}</td>
           <td>
@@ -48,10 +54,31 @@
     data () {
       return {
         results: [],
-        selected: []
+        selected: [],
+        search: 'test'
+      }
+    },
+    watch: {
+      search: function() {
+        if (this.search === '') this.results = []
       }
     },
     methods: {
+      getRepos () {
+        let self = this
+        this.results = axios.get('https://api.github.com/search/repositories', {params: {q: this.search, page: 1, per_page: 10}})
+          .then(function (response) {
+            console.log("successful fetch")
+            self.results = response.data.items
+            for (let i = 0; i < self.results.length; i++) {
+              self.getTag(i)
+            }
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
+      },
       getTag (index) {
         var self = this
         axios.get(self.results[index]['tags_url'])
@@ -67,13 +94,16 @@
             console.log(error);
           })
       },
+      updateSearch(search) {
+        this.getRepos()
+      },
       addToSelection (item) {
         this.selected.push(item)
       },
       removeFromSelection(item) {
         let index = 0
         for (let i = 0; i < this.selected.length; i++) {
-           if (this.selected[i] === item) index = i
+          if (this.selected[i] === item) index = i
         }
         this.selected.splice(index, 1)
       },
@@ -85,19 +115,7 @@
       }
     },
     mounted () {
-      let self = this
-      this.results = axios.get('https://api.github.com/search/repositories', {params: {q: 'Shopify', page: 1, per_page: 10}})
-        .then(function (response) {
-          console.log("successful fetch")
-          self.results = response.data.items
-          for (let i = 0; i < self.results.length; i++) {
-            self.getTag(i)
-          }
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
+      this.getRepos()
     }
   }
 </script>
