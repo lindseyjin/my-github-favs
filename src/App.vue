@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="app-container">
     <div id="header">
       <h1>My Github Favourites</h1>
     </div>
@@ -8,21 +8,21 @@
 </template>
 
 <script>
-import MainPage from './components/main-page'
+  import MainPage from './components/main-page'
 
-export default {
-  name: 'App',
-  components: {MainPage}
-}
+  export default {
+    name: 'App',
+    components: {MainPage}
+  }
 </script>
 
 <style>
 
-   html, body, .container {
-     margin: 0;
-     height: 100%;
-     font-family: 'Roboto', sans-serif;
-}
+  html, body, .app-container {
+    margin: 0;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+  }
   h1 {
     color: white;
     text-align: center;
