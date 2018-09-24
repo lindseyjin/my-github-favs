@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div id="header">
-      <h1>My Github Favourites</h1>
+      <h2>My Github Favourites</h2>
     </div>
     <MainPage></MainPage>
   </div>
@@ -23,12 +23,13 @@
     height: 100%;
     font-family: 'Roboto', sans-serif;
   }
-  h1 {
+  h2 {
     color: white;
     text-align: center;
     margin: 0;
     padding-top: 45px;
     line-height: 1.4rem;
+    font-weight: 600;
   }
   #header {
     background-color: #7433F1;

@@ -4,18 +4,18 @@
       <form class="form-search">
         <div class="input-append">
           <input type="text" v-model="search" class="span2 search-query">
-          <button type="submit" class="btn" @click="updateSearch(search)">Search</button>
+          <button type="submit" class="btn btn-search" @click="updateSearch(search)">Search</button>
         </div>
       </form>
       <table>
-        <tr>
+        <tr class="labels">
           <th>Name</th>
           <th>Language</th>
           <th>Latest tag</th>
           <th></th>
         </tr>
         <tr v-for="item in results">
-          <td> <a :href="item['html_url']">{{item['full_name']}}</a></td>
+          <td> <a :href="item['html_url']" target="_blank">{{item['full_name']}}</a></td>
           <td>{{item['language']}}</td>
           <td>{{item['latest_tag']}}</td>
           <td>
@@ -27,14 +27,14 @@
     </div>
     <div class="right">
       <table>
-        <tr>
+        <tr class="labels">
           <th>Name</th>
           <th>Language</th>
           <th>Latest tag</th>
           <th></th>
         </tr>
         <tr v-for="item in selected">
-          <td><a :href="item['html_url']">{{item['full_name']}}</a></td>
+          <td><a :href="item['html_url']" target="_blank">{{item['full_name']}}</a></td>
           <td>{{item['language']}}</td>
           <td>{{item['latest_tag']}}</td>
           <td>
@@ -127,19 +127,47 @@
     position: relative;
   }
   .left {
-    width: 44%;
+    width: 50%;
     float: left;
     height: 100%;
-    padding: 3%;
+    padding: 3% 4%;
   }
   .right {
-    width: 44%;
+    width: 50%;
     float: right;
     background-color: #F3ECFE;
     height: 100%;
-    padding: 3%;
+    padding: 3% 4%;
   }
   table {
-    font-size: 10px;
+    font-size: 11px;
+    width: 100%;
+  }
+  .input-append {
+    margin-bottom: 30px;
+  }
+  .search-query {
+    width: 70%;
+    height: 2rem;
+    border: 0.8px solid #3b3b3b;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+  .btn-search {
+    color: white;
+    width: 100px;
+    height: 2rem;
+    background-color: #7433F1;
+    font-size: 11px;
+    margin-left: 10px;
+  }
+  .btn-link {
+    color: #7433F1;
+    font-size: 11px;
+    padding: 0;
+  }
+  .labels {
+    vertical-align: top;
+    height: 25px;
   }
 </style>
